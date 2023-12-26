@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Mega Sena</title>
+    <link rel="icon" href="favicon.png">
+    <style>
+        body {
+            background-color: rgb(189, 189, 189);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        button {
+            margin-bottom: 20px;
+            font-size: 35px; /* Tamanho da fonte para o botão */
+            border-radius: 10px;
+        }
+
+        #resultado {
+            font-size: 35px; /* Tamanho da fonte para o resultado */
+        }
+    </style>
+</head>
+
+<body>
+<h1>Autor: Alan Diego</h1>
+<button id="sortear">Clique para sortear 6 números</button>
+<div id="resultado"></div>
+
+<script>
+
+    let button = document.getElementById("sortear");
+    button.onclick = sorteiaNumeros;
+
+    function sorteia() {
+        return Math.round(Math.random() * 100);
+    }
+
+    function sorteiaNumeros() {
+        let megaSena = [];
+        let numero = 1;
+
+        while (numero <= 6) {
+            let numeroAleatorio = sorteia();
+            let achou = false;
+
+            if (numeroAleatorio !== 0 && numeroAleatorio <= 60) {
+                for (posicao = 0; posicao < megaSena.length; posicao++) {
+                    if (megaSena[posicao] == numeroAleatorio) {
+                        achou = true;
+                        break;
+                    }
+                }
+
+                if (achou == false) {
+                    megaSena.push(numeroAleatorio);
+                    numero++;
+                }
+            }
+        }
+
+        // Exibindo o resultado na tela
+        let resultadoDiv = document.getElementById("resultado");
+        resultadoDiv.innerHTML = "Os números da sorte são: " + megaSena.join(", ");
+    }
+
+</script>
+</body>
+</html>
